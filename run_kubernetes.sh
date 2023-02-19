@@ -5,7 +5,7 @@
 # Step 1:
 # This is your Docker ID/path
 dockerpath=naittou/ml-api
-echo $PASSWORD | docker login -u  naittou --password-stdin
+echo $PASSWORD | docker login -u $USERNAME --password-stdin
 docker image tag ml-api $dockerpath
 docker push $dockerpath
 
