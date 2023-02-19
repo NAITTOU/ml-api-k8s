@@ -1,4 +1,4 @@
-<include a CircleCI status badge, here>
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/NAITTOU/ml-api-k8s/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/NAITTOU/ml-api-k8s/tree/master)
 
 ## Project Overview
 
