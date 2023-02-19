@@ -1,1 +1,78 @@
 <paste log output from Kubernetes-mediated prediction, here>
+
+run_kubernetes output : 
+
+WARNING! Your password will be stored unencrypted in /home/ubuntu/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+
+Login Succeeded
+Error response from daemon: No such image: ml-api:latest
+Using default tag: latest
+The push refers to repository [docker.io/naittou/ml-api]
+An image does not exist locally with the tag: naittou/ml-api
+E0219 13:30:10.786987    6187 memcache.go:255] couldn't get resource list for metrics.k8s.io/v1beta1: the server is currently unable to handle the request
+E0219 13:30:10.802500    6187 memcache.go:106] couldn't get resource list for metrics.k8s.io/v1beta1: the server is currently unable to handle the request
+pod/udacity-ml-api created
+E0219 13:30:11.041467    6254 memcache.go:255] couldn't get resource list for metrics.k8s.io/v1beta1: the server is currently unable to handle the request
+E0219 13:30:11.062374    6254 memcache.go:106] couldn't get resource list for metrics.k8s.io/v1beta1: the server is currently unable to handle the request
+E0219 13:30:11.067134    6254 memcache.go:106] couldn't get resource list for metrics.k8s.io/v1beta1: the server is currently unable to handle the request
+E0219 13:30:11.081985    6254 memcache.go:106] couldn't get resource list for metrics.k8s.io/v1beta1: the server is currently unable to handle the request
+NAME             READY   STATUS              RESTARTS   AGE
+udacity-ml-api   0/1     ContainerCreating   0          1s
+E0219 13:30:11.338993    6293 memcache.go:255] couldn't get resource list for metrics.k8s.io/v1beta1: the server is currently unable to handle the request
+E0219 13:30:11.345194    6293 memcache.go:106] couldn't get resource list for metrics.k8s.io/v1beta1: the server is currently unable to handle the request
+E0219 13:30:11.348320    6293 memcache.go:106] couldn't get resource list for metrics.k8s.io/v1beta1: the server is currently unable to handle the request
+error: unable to forward port because pod is not running. Current status=Pending
+ubuntu@ip-172-31-6-3:~/ml-api-k8s/project-ml-microservice-kubernetes$ ./run_kubernetes.sh 
+WARNING! Your password will be stored unencrypted in /home/ubuntu/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+
+Login Succeeded
+Error response from daemon: No such image: ml-api:latest
+Using default tag: latest
+The push refers to repository [docker.io/naittou/ml-api]
+An image does not exist locally with the tag: naittou/ml-api
+Error from server (AlreadyExists): pods "udacity-ml-api" already exists
+NAME             READY   STATUS    RESTARTS   AGE
+udacity-ml-api   1/1     Running   0          43s
+Forwarding from 127.0.0.1:8000 -> 80
+Forwarding from [::1]:8000 -> 80
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+make_prediction output : 
+
+Port: 8000
+{
+  "prediction": [
+    20.35373177134412
+  ]
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+kubectl logs udacity-ml-api output : 
+
+ * Serving Flask app "app" (lazy loading)
+ * Environment: production
+   WARNING: Do not use the development server in a production environment.
+   Use a production WSGI server instead.
+ * Debug mode: on
+ * Running on http://0.0.0.0:80/ (Press CTRL+C to quit)
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 231-622-766
+[2023-02-19 13:33:41,066] INFO in app: JSON payload: 
+{'CHAS': {'0': 0}, 'RM': {'0': 6.575}, 'TAX': {'0': 296.0}, 'PTRATIO': {'0': 15.3}, 'B': {'0': 396.9}, 'LSTAT': {'0': 4.98}}
+[2023-02-19 13:33:41,086] INFO in app: Inference payload DataFrame: 
+   CHAS     RM    TAX  PTRATIO      B  LSTAT
+0     0  6.575  296.0     15.3  396.9   4.98
+[2023-02-19 13:33:41,095] INFO in app: Scaling Payload: 
+   CHAS     RM    TAX  PTRATIO      B  LSTAT
+0     0  6.575  296.0     15.3  396.9   4.98
+[2023-02-19 13:33:41,100] INFO in app: prediction: [20.35373177134412]
+127.0.0.1 - - [19/Feb/2023 13:33:41] "POST /predict HTTP/1.1" 200 -
